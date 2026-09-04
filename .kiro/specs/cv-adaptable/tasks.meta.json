@@ -1,0 +1,444 @@
+{
+  "pbtResults": {
+    "3.4 Escribir property test — Property 8: Security headers en todas las respuestas": {
+      "status": "passed",
+      "lastRunTimestamp": 1787754117922
+    }
+  },
+  "executionHistory": {
+    "1. Configuración inicial del proyecto Django y estructura de apps": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751818516
+      }
+    ],
+    "2.1 Implementar modelos de la app `perfil`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751818993
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751830406
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752462040
+      }
+    ],
+    "2.2 Implementar modelos de la app `certificados`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819057
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751831252
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752462825
+      }
+    ],
+    "2.3 Generar y aplicar migraciones": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819122
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752466764
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752626301
+      }
+    ],
+    "3.1 Implementar `SecurityHeadersMiddleware` y configuración de seguridad": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819178
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752932755
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787753458835
+      }
+    ],
+    "3.2 Implementar vistas de autenticación en `core`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819254
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752933550
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787753459738
+      }
+    ],
+    "3.3 Escribir unit tests para autenticación y middleware": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819315
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787753465361
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754137358
+      }
+    ],
+    "3.4 Escribir property test — Property 8: Security headers en todas las respuestas": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819355
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787753465646
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754139321
+      }
+    ],
+    "4. Checkpoint — Autenticación y seguridad base funcionan": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819394
+      }
+    ],
+    "5.1 Implementar formularios de la app `perfil`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819441
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787753466593
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754139597
+      }
+    ],
+    "5.2 Implementar CBVs y URLs del `Perfil`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819484
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754143118
+      }
+    ],
+    "5.3 Implementar CBVs y URLs de `Experiencia`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819526
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754143911
+      }
+    ],
+    "5.4 Implementar CBVs y URLs de `Educacion`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819576
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754144767
+      }
+    ],
+    "5.5 Implementar CBVs y URLs de `Habilidad`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819628
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754145618
+      }
+    ],
+    "5.6 Implementar CBVs y URLs de `Idioma`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819690
+      },
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754146459
+      }
+    ],
+    "5.7 Escribir unit tests para la app `perfil`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819733
+      }
+    ],
+    "5.8 Escribir property test — Property 3: Validación de rango de fechas": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819774
+      }
+    ],
+    "5.9 Escribir property test — Property 4: Unicidad de nombres case-insensitive": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819816
+      }
+    ],
+    "6. Checkpoint — CRUD de perfil completo funciona": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819857
+      }
+    ],
+    "7.1 Implementar `FileHandler`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819899
+      }
+    ],
+    "7.2 Implementar CBVs y URLs de `Categoria`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819949
+      }
+    ],
+    "7.3 Implementar CBVs y URLs de `Certificado` con `CertificadoServeView`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751819992
+      }
+    ],
+    "7.4 Escribir unit tests para `certificados`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820061
+      }
+    ],
+    "7.5 Escribir property test — Property 5: Eliminar Categoría preserva elementos asociados": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820130
+      }
+    ],
+    "7.6 Escribir property tests — Properties 6 y 7: FileHandler": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820176
+      }
+    ],
+    "7.7 Escribir property test — Property 9: Ownership check deniega acceso a no propietarios": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820218
+      }
+    ],
+    "8. Checkpoint — App certificados completa con ownership y atomicidad": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820266
+      }
+    ],
+    "9.1 Implementar `CVGenerator`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820315
+      }
+    ],
+    "9.2 Implementar `CVPreviewView` (vista previa estándar)": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820356
+      }
+    ],
+    "9.3 Implementar `CVGeneradorView` con formulario de selección": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820398
+      }
+    ],
+    "9.4 Escribir unit tests para el generador": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820447
+      }
+    ],
+    "9.5 Escribir property test — Property 1: Filtrado exacto por categorías": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820491
+      }
+    ],
+    "9.6 Escribir property test — Property 2: Datos no filtrados siempre completos": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820531
+      }
+    ],
+    "10. Checkpoint — Generador de CV completo": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820576
+      }
+    ],
+    "11.1 Crear `base.html` y `base_print.html`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820618
+      }
+    ],
+    "11.2 Crear templates de `core` (login y dashboard)": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820662
+      }
+    ],
+    "11.3 Crear templates de `perfil`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820706
+      }
+    ],
+    "11.4 Crear templates de `certificados`": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820749
+      }
+    ],
+    "11.5 Crear templates del `generador` (cv_preview, generador, cv_generado)": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820793
+      }
+    ],
+    "12. Checkpoint — Templates y firma visual completos": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820837
+      }
+    ],
+    "13.1 Conectar todas las apps en el URLconf raíz": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820882
+      }
+    ],
+    "13.2 Configurar `pytest.ini` / `conftest.py` y ejecutar suite completa": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820924
+      }
+    ],
+    "14.1 Preparar archivos de configuración para producción": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751820968
+      }
+    ],
+    "14.2 Verificar configuración de archivos estáticos y uploads": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751821010
+      }
+    ],
+    "15. Checkpoint final — Suite completa de tests pasa": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787751821051
+      }
+    ],
+    "2. Modelos de datos y migraciones": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787752626345
+      }
+    ],
+    "3. Autenticación, middleware de seguridad y configuración de django-axes": [
+      {
+        "executionId": "699da59c-dfa2-4201-9722-3da0ee2e8cfa",
+        "chatSessionId": "sess_60113e09-59d2-4ae0-bf7d-372778b7c28b",
+        "timestamp": 1787754139370
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+# Configuración de estilo base para todos los editores compatibles con EditorConfig.
+# NO define end_of_line para no forzar conversiones de CRLF/LF en los archivos existentes.
+root = true
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.{html,css,js,json}]
+indent_style = space
+indent_size = 2

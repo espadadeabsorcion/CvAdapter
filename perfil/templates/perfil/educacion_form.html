@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if object %}Editar Educación{% else %}Nueva Educación{% endif %} — CV Adaptable{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card card-custom p-4">
+            <h3 class="fw-bold mb-3">
+                <i class="fa-solid fa-graduation-cap text-primary me-2"></i>
+                {% if object %}Editar Educación{% else %}Nueva Formación Académica{% endif %}
+            </h3>
+
+            <form method="post" id="educacionForm">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_institucion" class="form-label fw-semibold">Institución Académica <span class="text-danger">*</span></label>
+                    <input type="text" name="institucion" id="id_institucion" class="form-control" value="{{ form.institucion.value|default:'' }}" required placeholder="Ej: Universidad Nacional / Escuela Politécnica">
+                    {% if form.institucion.errors %}<div class="error">{{ form.institucion.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_titulo" class="form-label fw-semibold">Título / Carrera / Grado Obtenido <span class="text-danger">*</span></label>
+                    <input type="text" name="titulo" id="id_titulo" class="form-control" value="{{ form.titulo.value|default:'' }}" required placeholder="Ej: Licenciatura en Ciencias de la Computación">
+                    {% if form.titulo.errors %}<div class="error">{{ form.titulo.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_fecha_inicio" class="form-label fw-semibold">Fecha de Inicio <span class="text-danger">*</span></label>
+                        <input type="date" name="fecha_inicio" id="id_fecha_inicio" class="form-control" value="{{ form.fecha_inicio.value|date:'Y-m-d'|default:'' }}" required>
+                        {% if form.fecha_inicio.errors %}<div class="error">{{ form.fecha_inicio.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_fecha_fin" class="form-label fw-semibold">Fecha de Graduación / Fin</label>
+                        <input type="date" name="fecha_fin" id="id_fecha_fin" class="form-control" value="{{ form.fecha_fin.value|date:'Y-m-d'|default:'' }}">
+                        {% if form.fecha_fin.errors %}<div class="error">{{ form.fecha_fin.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="id_descripcion" class="form-label fw-semibold">Detalles Adicionales (Opcional)</label>
+                    <textarea name="descripcion" id="id_descripcion" class="form-control" rows="3" placeholder="Menciones de honor, reconocimientos o proyectos de grado...">{{ form.descripcion.value|default:'' }}</textarea>
+                    {% if form.descripcion.errors %}<div class="error">{{ form.descripcion.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'perfil:educacion_lista' %}" class="btn btn-outline-secondary px-3">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-cv-primary px-4 py-2">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Educación
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        $('#educacionForm').validate({
+            rules: {
+                institucion: { required: true, maxlength: 200 },
+                titulo: { required: true, maxlength: 200 },
+                fecha_inicio: { required: true }
+            },
+            messages: {
+                institucion: { required: "La institución es obligatoria." },
+                titulo: { required: "El título obtenido es obligatorio." },
+                fecha_inicio: { required: "La fecha de inicio es obligatoria." }
+            },
+            errorElement: 'div',
+            errorClass: 'error'
+        });
+    });
+</script>
+{% endblock %}

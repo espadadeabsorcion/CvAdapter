@@ -1,0 +1,145 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if object %}Editar Certificado{% else %}Subir Certificado PDF{% endif %} — CV Adaptable{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card card-custom p-4">
+            <h3 class="fw-bold mb-3">
+                <i class="fa-solid fa-file-arrow-up text-danger me-2"></i>
+                {% if object %}Editar Certificado PDF{% else %}Subir Certificado PDF{% endif %}
+            </h3>
+            <p class="text-muted small mb-4">Adjunta respaldos en formato PDF (máximo 5MB). Puedes asociar este certificado a una o más categorías profesionales.</p>
+
+            <form method="post" enctype="multipart/form-data" id="certificadoForm">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="id_nombre" class="form-label fw-semibold">Nombre / Título del Certificado <span class="text-danger">*</span></label>
+                    <input type="text" name="nombre" id="id_nombre" class="form-control" value="{{ form.nombre.value|default:'' }}" required placeholder="Ej: Certificación en Python & Django Web Development">
+                    {% if form.nombre.errors %}<div class="error">{{ form.nombre.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_institucion" class="form-label fw-semibold">Institución Emisora</label>
+                        <input type="text" name="institucion" id="id_institucion" class="form-control" value="{{ form.institucion.value|default:'' }}" placeholder="Ej: Platzi, Coursera, Universidad X">
+                        {% if form.institucion.errors %}<div class="error">{{ form.institucion.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_fecha_obtencion" class="form-label fw-semibold">Fecha de Obtención</label>
+                        <input type="date" name="fecha_obtencion" id="id_fecha_obtencion" class="form-control" value="{{ form.fecha_obtencion.value|date:'Y-m-d'|default:'' }}">
+                        {% if form.fecha_obtencion.errors %}<div class="error">{{ form.fecha_obtencion.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_archivo_pdf" class="form-label fw-semibold">
+                        Archivo PDF {% if not object %}<span class="text-danger">*</span>{% endif %} (Máximo 5MB)
+                    </label>
+                    <input type="file" name="archivo_pdf" id="id_archivo_pdf" class="form-control" accept="application/pdf" {% if not object %}required{% endif %}>
+                    {% if object and object.archivo_url %}
+                        <div class="form-text text-success">
+                            <i class="fa-solid fa-file-pdf me-1"></i> Archivo actual: <strong>{{ object.archivo_url }}</strong> (Déjalo en blanco si no deseas reemplazarlo).
+                        </div>
+                    {% else %}
+                        <div class="form-text">Solo se permiten archivos con formato PDF de hasta 5 Megabytes.</div>
+                    {% endif %}
+                    {% if form.archivo_pdf.errors %}<div class="error">{{ form.archivo_pdf.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 gap-2">
+                        <label class="form-label fw-semibold mb-0">Categorías Asociadas</label>
+                        <div class="d-flex gap-2">
+                            <button type="button" id="btn-seleccionar-todas" class="btn btn-sm btn-outline-success">
+                                <i class="fa-solid fa-check-double me-1"></i> Seleccionar todas
+                            </button>
+                            <button type="button" id="btn-deseleccionar-todas" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa-solid fa-square-xmark me-1"></i> Desmarcar todas
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card p-3 bg-light border-0 rounded-3">
+                        {% for cat in form.categorias.field.queryset %}
+                            <div class="form-check form-check-inline mb-2 me-3">
+                                <input class="form-check-input" type="checkbox" name="categorias" value="{{ cat.id }}" id="cat_{{ cat.id }}" {% if cat in object.categorias.all %}checked{% endif %}>
+                                <label class="form-check-label fw-medium" for="cat_{{ cat.id }}">{{ cat.nombre }}</label>
+                            </div>
+                        {% empty %}
+                            <span class="text-muted small">No has creado categorías todavía. Puedes agregarlas más tarde en la sección Categorías.</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'certificados:certificado_lista' %}" class="btn btn-outline-secondary px-3">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-cv-primary px-4 py-2">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> {% if object %}Guardar Cambios{% else %}Subir Certificado{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        var $checkboxes = $('input[type="checkbox"][name="categorias"]');
+
+        $('#btn-seleccionar-todas').on('click', function () {
+            $checkboxes.prop('checked', true);
+        });
+
+        $('#btn-deseleccionar-todas').on('click', function () {
+            $checkboxes.prop('checked', false);
+        });
+
+        $('#certificadoForm').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    maxlength: 255
+                },
+                archivo_pdf: {
+                    required: {% if object %}false{% else %}true{% endif %}
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "El nombre del certificado es obligatorio."
+                },
+                archivo_pdf: {
+                    required: "Debe seleccionar un archivo PDF."
+                }
+            },
+            errorElement: 'div',
+            errorClass: 'error'
+        });
+
+        // Validación en cliente del tamaño máximo (5MB) y formato .pdf
+        $('#id_archivo_pdf').on('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const maxSize = 5 * 1024 * 1024; // 5MB
+                if (file.size > maxSize) {
+                    alert('El archivo excede el tamaño máximo permitido de 5MB.');
+                    this.value = '';
+                    return;
+                }
+                if (!file.name.toLowerCase().endsWith('.pdf')) {
+                    alert('Solo se permiten archivos con extensión .pdf.');
+                    this.value = '';
+                    return;
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
+

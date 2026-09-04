@@ -1,0 +1,3 @@
+# Plantillas Django (contienen tags {% %} y {{ }} que Prettier no entiende).
+# Prettier las descompone en varias líneas y rompe el render del template.
+*.html

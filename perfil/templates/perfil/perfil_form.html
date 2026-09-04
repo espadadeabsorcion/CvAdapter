@@ -1,0 +1,270 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Mi Perfil — CV Adaptable{% endblock %}
+
+{% block extra_css %}
+<style>
+    .foto-preview-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e2e8f0;
+        color: #64748b;
+        font-size: 2rem;
+        border: 3px solid #cbd5e1;
+        flex-shrink: 0;
+    }
+    .foto-preview-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card card-custom p-4">
+            <h3 class="fw-bold mb-3">
+                <i class="fa-solid fa-user text-primary me-2"></i> Mi Perfil Profesional
+            </h3>
+            <p class="text-muted small mb-4">Ingresa tus datos de contacto y resumen profesional. Esta información es la base de todos tus CVs generados.</p>
+
+            <form id="perfilForm" method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
+
+                <!-- Nombre completo -->
+                <div class="mb-3">
+                    <label for="{{ form.nombre_completo.id_for_label }}" class="form-label fw-semibold">
+                        Nombre Completo <span class="text-danger">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="{{ form.nombre_completo.id_for_label }}"
+                        name="{{ form.nombre_completo.html_name }}"
+                        value="{{ form.nombre_completo.value|default:'' }}"
+                        maxlength="100"
+                        class="form-control {% if form.nombre_completo.errors %}is-invalid{% endif %}"
+                        placeholder="Ej: Lenin Ramírez"
+                        required
+                    >
+                    {% if form.nombre_completo.errors %}<div class="error">{{ form.nombre_completo.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold">
+                        Correo Electrónico <span class="text-danger">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        id="{{ form.email.id_for_label }}"
+                        name="{{ form.email.html_name }}"
+                        value="{{ form.email.value|default:'' }}"
+                        maxlength="254"
+                        class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                        placeholder="Ej: correo@ejemplo.com"
+                        required
+                    >
+                    {% if form.email.errors %}<div class="error">{{ form.email.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Teléfono -->
+                <div class="mb-3">
+                    <label for="{{ form.telefono.id_for_label }}" class="form-label fw-semibold">
+                        Teléfono / WhatsApp <span class="text-danger">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="{{ form.telefono.id_for_label }}"
+                        name="{{ form.telefono.html_name }}"
+                        value="{{ form.telefono.value|default:'' }}"
+                        maxlength="20"
+                        class="form-control {% if form.telefono.errors %}is-invalid{% endif %}"
+                        placeholder="Ej: +593 99 123 4567"
+                        required
+                    >
+                    {% if form.telefono.errors %}<div class="error">{{ form.telefono.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Título profesional -->
+                <div class="mb-3">
+                    <label for="{{ form.titulo_profesional.id_for_label }}" class="form-label fw-semibold">
+                        Título Profesional Principal <span class="text-danger">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        id="{{ form.titulo_profesional.id_for_label }}"
+                        name="{{ form.titulo_profesional.html_name }}"
+                        value="{{ form.titulo_profesional.value|default:'' }}"
+                        maxlength="100"
+                        class="form-control {% if form.titulo_profesional.errors %}is-invalid{% endif %}"
+                        placeholder="Ej: Especialista en Gestión de Talento & RRHH"
+                        required
+                    >
+                    {% if form.titulo_profesional.errors %}<div class="error">{{ form.titulo_profesional.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="mb-3">
+                    <label for="{{ form.linkedin.id_for_label }}" class="form-label fw-semibold">
+                        <i class="fa-brands fa-linkedin text-primary me-1"></i> LinkedIn (Opcional)
+                    </label>
+                    <input
+                        type="url"
+                        id="{{ form.linkedin.id_for_label }}"
+                        name="{{ form.linkedin.html_name }}"
+                        value="{{ form.linkedin.value|default:'' }}"
+                        maxlength="200"
+                        class="form-control {% if form.linkedin.errors %}is-invalid{% endif %}"
+                        placeholder="https://www.linkedin.com/in/tu-perfil"
+                    >
+                    {% if form.linkedin.errors %}<div class="error">{{ form.linkedin.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Ubicación -->
+                <div class="mb-3">
+                    <label for="{{ form.ubicacion.id_for_label }}" class="form-label fw-semibold">
+                        Ubicación
+                    </label>
+                    <input
+                        type="text"
+                        id="{{ form.ubicacion.id_for_label }}"
+                        name="{{ form.ubicacion.html_name }}"
+                        value="{{ form.ubicacion.value|default:'' }}"
+                        maxlength="150"
+                        class="form-control {% if form.ubicacion.errors %}is-invalid{% endif %}"
+                        placeholder="Ej: Quito, Ecuador"
+                    >
+                    {% if form.ubicacion.errors %}<div class="error">{{ form.ubicacion.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Fotografía -->
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Fotografía <span class="fw-normal text-muted">(aparece en el círculo de tu CV)</span></label>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="foto-preview-circle" id="fotoPreviewWrap">
+                            <img
+                                src="{{ perfil.foto_efectiva }}"
+                                alt="Foto de perfil"
+                                id="fotoPreview"
+                                class="foto-preview-img {% if not perfil.foto_efectiva %}d-none{% endif %}"
+                            >
+                            {% if not perfil.foto_efectiva %}
+                            <i class="fa-solid fa-user" id="fotoPlaceholder"></i>
+                            {% endif %}
+                        </div>
+                        <div class="flex-grow-1">
+                            <input
+                                type="file"
+                                id="{{ form.foto.auto_id }}"
+                                name="{{ form.foto.html_name }}"
+                                accept="image/*"
+                                class="form-control {% if form.foto.errors %}is-invalid{% endif %}"
+                            >
+                            <div class="form-text">Sube una imagen (JPG/PNG) desde tu dispositivo.</div>
+                            {% if form.foto.errors %}<div class="error">{{ form.foto.errors.0 }}</div>{% endif %}
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label for="{{ form.foto_url.id_for_label }}" class="form-label small fw-semibold">O enlaza una fotografía por URL (opcional, respaldo)</label>
+                        <input
+                            type="url"
+                            id="{{ form.foto_url.id_for_label }}"
+                            name="{{ form.foto_url.html_name }}"
+                            value="{{ form.foto_url.value|default:'' }}"
+                            maxlength="200"
+                            class="form-control {% if form.foto_url.errors %}is-invalid{% endif %}"
+                            placeholder="https://ejemplo.com/mi-foto.jpg"
+                        >
+                        {% if form.foto_url.errors %}<div class="error">{{ form.foto_url.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <!-- Resumen profesional -->
+                <div class="mb-3">
+                    <label for="{{ form.resumen_profesional.id_for_label }}" class="form-label fw-semibold">
+                        Resumen Profesional <span class="text-danger">*</span>
+                    </label>
+                    <textarea
+                        id="{{ form.resumen_profesional.id_for_label }}"
+                        name="{{ form.resumen_profesional.html_name }}"
+                        maxlength="1000"
+                        rows="5"
+                        class="form-control {% if form.resumen_profesional.errors %}is-invalid{% endif %}"
+                        placeholder="Breve síntesis de tu perfil, años de experiencia y metas (máx. 1000 caracteres)"
+                        required
+                    >{{ form.resumen_profesional.value|default:'' }}</textarea>
+                    <div class="form-text text-end" id="resumenCount">0 / 1000</div>
+                    {% if form.resumen_profesional.errors %}<div class="error">{{ form.resumen_profesional.errors.0 }}</div>{% endif %}
+                </div>
+
+                <!-- Acciones -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'core:dashboard' %}" class="btn btn-outline-secondary px-3">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Dashboard
+                    </a>
+                    <button type="submit" class="btn btn-cv-primary px-4 py-2">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Perfil Base
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        const resumenArea = $('#{{ form.resumen_profesional.id_for_label }}');
+        const resumenCount = $('#resumenCount');
+
+        function updateCount() {
+            const len = resumenArea.val().length;
+            resumenCount.text(len + ' / 1000');
+            resumenCount.toggleClass('text-danger', len > 900);
+        }
+
+        resumenArea.on('input', updateCount);
+        updateCount();
+
+        // Vista previa de la fotografía al seleccionar un archivo
+        $('#{{ form.foto.auto_id }}').on('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    $('#fotoPreview').attr('src', ev.target.result).removeClass('d-none');
+                    $('#fotoPlaceholder').addClass('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        $('#perfilForm').validate({
+            rules: {
+                nombre_completo: { required: true, maxlength: 100 },
+                email: { required: true, email: true, maxlength: 254 },
+                telefono: { required: true, maxlength: 20 },
+                titulo_profesional: { required: true, maxlength: 100 },
+                resumen_profesional: { required: true, maxlength: 1000 }
+            },
+            messages: {
+                nombre_completo: { required: "El nombre completo es obligatorio." },
+                email: { required: "El correo electrónico es obligatorio.", email: "Ingresa un email válido." },
+                telefono: { required: "El teléfono es obligatorio." },
+                titulo_profesional: { required: "El título profesional es obligatorio." },
+                resumen_profesional: { required: "El resumen profesional es obligatorio." }
+            },
+            errorElement: 'div',
+            errorClass: 'error'
+        });
+    });
+</script>
+{% endblock %}

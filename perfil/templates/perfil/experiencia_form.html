@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{% if object %}Editar Experiencia{% else %}Nueva Experiencia{% endif %} — CV Adaptable{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-7">
+        <div class="card card-custom p-4">
+            <h3 class="fw-bold mb-3">
+                <i class="fa-solid fa-briefcase text-primary me-2"></i>
+                {% if object %}Editar Experiencia Laboral{% else %}Nueva Experiencia Laboral{% endif %}
+            </h3>
+
+            <form method="post" id="experienciaForm">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_empresa" class="form-label fw-semibold">Empresa / Organización <span class="text-danger">*</span></label>
+                        <input type="text" name="empresa" id="id_empresa" class="form-control" value="{{ form.empresa.value|default:'' }}" required placeholder="Ej: Tech Solutions Inc.">
+                        {% if form.empresa.errors %}<div class="error">{{ form.empresa.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_cargo" class="form-label fw-semibold">Cargo / Puesto <span class="text-danger">*</span></label>
+                        <input type="text" name="cargo" id="id_cargo" class="form-control" value="{{ form.cargo.value|default:'' }}" required placeholder="Ej: Desarrollador Backend Senior">
+                        {% if form.cargo.errors %}<div class="error">{{ form.cargo.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_fecha_inicio" class="form-label fw-semibold">Fecha de Inicio <span class="text-danger">*</span></label>
+                        <input type="date" name="fecha_inicio" id="id_fecha_inicio" class="form-control" value="{{ form.fecha_inicio.value|date:'Y-m-d'|default:'' }}" required>
+                        {% if form.fecha_inicio.errors %}<div class="error">{{ form.fecha_inicio.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_fecha_fin" class="form-label fw-semibold">Fecha de Fin</label>
+                        <input type="date" name="fecha_fin" id="id_fecha_fin" class="form-control" value="{{ form.fecha_fin.value|date:'Y-m-d'|default:'' }}">
+                        {% if form.fecha_fin.errors %}<div class="error">{{ form.fecha_fin.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="actual" id="id_actual" {% if form.actual.value %}checked{% endif %}>
+                    <label class="form-check-label fw-medium" for="id_actual">
+                        Trabajo aquí actualmente
+                    </label>
+                </div>
+
+                <div class="mb-4">
+                    <label for="id_descripcion" class="form-label fw-semibold">Descripción de Logros y Responsabilidades</label>
+                    <textarea name="descripcion" id="id_descripcion" class="form-control" rows="4" placeholder="Describe los proyectos principales, tecnologías empleadas y logros alcanzados...">{{ form.descripcion.value|default:'' }}</textarea>
+                    {% if form.descripcion.errors %}<div class="error">{{ form.descripcion.errors.0 }}</div>{% endif %}
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{% url 'perfil:experiencia_lista' %}" class="btn btn-outline-secondary px-3">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Cancelar
+                    </a>
+                    <button type="submit" class="btn btn-cv-primary px-4 py-2">
+                        <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Experiencia
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        $('#experienciaForm').validate({
+            rules: {
+                empresa: { required: true, maxlength: 100 },
+                cargo: { required: true, maxlength: 100 },
+                fecha_inicio: { required: true }
+            },
+            messages: {
+                empresa: { required: "El nombre de la empresa es obligatorio." },
+                cargo: { required: "El cargo es obligatorio." },
+                fecha_inicio: { required: "La fecha de inicio es obligatoria." }
+            },
+            errorElement: 'div',
+            errorClass: 'error'
+        });
+
+        $('#id_actual').on('change', function() {
+            if (this.checked) {
+                $('#id_fecha_fin').val('').prop('disabled', true);
+            } else {
+                $('#id_fecha_fin').prop('disabled', false);
+            }
+        }).trigger('change');
+    });
+</script>
+{% endblock %}

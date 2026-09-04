@@ -1,0 +1,24 @@
+# Entorno y secretos
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+*.log
+
+# Testing
+pytest_cache/
+.pytest_cache/
+
+# Editor
+.vscode/
+.idea/
