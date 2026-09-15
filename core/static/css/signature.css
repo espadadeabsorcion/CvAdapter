@@ -1,69 +1,84 @@
 /* ==========================================================================
    FIRMA VISUAL v2.0 — CV Adaptable
    ==========================================================================
-   Paleta:
-     - Azul (Header/Navbar):      linear-gradient(135deg, #11cdef 0%, #1171ef 100%)
-     - Verde (Primario/Guardar):  linear-gradient(135deg, #11f577 0%, #0ba85d 100%)
-     - Violeta (Secundario):      linear-gradient(135deg, #a855f7 0%, #ec4899 100%)
-     - 🔴 Rojo (Acento):          #ff4757  (SOLO usos específicos, ver abajo)
+   Paleta y Variables Obligatorias:
+     - Primario (Azul Header/Navbar): linear-gradient(135deg, #11cdef, #1171ef)
+     - Secundario (Verde Acción):     linear-gradient(135deg, #11f577, #0ba85d)
+     - Acento (Rojo Marca Personal):  #ff4757 (Hover/Dark: #c0392b)
    Tipografía: Poppins (titulares) / Roboto (cuerpo) — Google Fonts.
    ========================================================================== */
 
 :root {
-    --cv-blue-start: #11cdef;
-    --cv-blue-end: #1171ef;
-    --cv-green-start: #11f577;
-    --cv-green-end: #0ba85d;
+    /* Variables Firma Visual v2.0 Requeridas */
+    --primary-blue-start: #11cdef;
+    --primary-blue-end: #1171ef;
+    --success-green-start: #11f577;
+    --success-green-end: #0ba85d;
+    --accent-red: #ff4757;
+    --accent-red-dark: #c0392b;
+
+    /* Aliases de compatibilidad */
+    --cv-blue-start: var(--primary-blue-start);
+    --cv-blue-end: var(--primary-blue-end);
+    --cv-green-start: var(--success-green-start);
+    --cv-green-end: var(--success-green-end);
     --cv-purple-start: #a855f7;
     --cv-purple-end: #ec4899;
-    --cv-red: #ff4757; /* 🔴 Acento personal: usar SOLO en usos marcados */
+    --cv-red: var(--accent-red);
     --cv-dark: #0f172a;
     --cv-slate-600: #475569;
     --cv-slate-100: #f1f5f9;
 }
 
 /* ==========================================================================
-   Tipografía (Poppins / Roboto)
+   Tipografía Base
    ========================================================================== */
 body {
     font-family: 'Roboto', system-ui, -apple-system, sans-serif;
     background-color: #f8fafc;
+    color: #334155;
 }
 
 h1, h2, h3, h4, h5, h6,
 .brand,
-.cv-section-title {
+.cv-section-title,
+.font-heading {
     font-family: 'Poppins', 'Roboto', system-ui, sans-serif;
 }
 
 /* ==========================================================================
-   Navbar / Header — Gradiente azul, texto blanco
+   Navbar / Header — Gradiente Azul Firma
    ========================================================================== */
+.navbar-signature,
 .cv-header {
-    background: linear-gradient(135deg, #11cdef 0%, #1171ef 100%);
+    background: linear-gradient(135deg, var(--primary-blue-start), var(--primary-blue-end));
     color: #ffffff;
-    box-shadow: 0 4px 15px rgba(17, 113, 239, 0.25);
+    box-shadow: 0 4px 16px rgba(17, 113, 239, 0.22);
 }
 
 .cv-header .brand {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     color: #ffffff;
     text-decoration: none;
 }
 
-/* Logo de marca en el navbar */
 .cv-header .brand .brand-logo {
-    height: 40px;
+    height: 38px;
     width: auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔴 Iniciales del logo en rojo (marca personal) */
+/* 🔴 Marca Personal: Acento Rojo */
+.brand-accent {
+    color: var(--accent-red);
+    font-weight: 700;
+}
+
 .cv-header .brand .brand-initials {
-    color: var(--cv-red);
+    color: var(--accent-red);
     font-weight: 800;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 8px;
@@ -71,101 +86,96 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ==========================================================================
-   Botones
+   Botones de Acción y Formularios
    ========================================================================== */
 
-/* Botones primarios (Guardar/Enviar) — Gradiente verde */
+/* Botón Primario Firma (Guardar / Acción principal) — Gradiente verde */
+.btn-primary-signature,
 .btn-cv-primary {
-    background: linear-gradient(135deg, #11f577 0%, #0ba85d 100%);
-    border: none;
+    background: linear-gradient(135deg, var(--success-green-start), var(--success-green-end));
     color: #ffffff !important;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    border: none;
     border-radius: 8px;
+    padding: 0.55rem 1.35rem;
     box-shadow: 0 4px 10px rgba(11, 168, 93, 0.2);
     transition: all 0.2s ease-in-out;
 }
+
+.btn-primary-signature:hover,
 .btn-cv-primary:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(11, 168, 93, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(11, 168, 93, 0.38);
+    color: #ffffff !important;
+    opacity: 0.95;
 }
 
-/* Botones secundarios — Gradiente violeta/magenta */
+/* Botón Secundario (Gradiente violeta/magenta) */
 .btn-cv-secondary {
-    background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+    background: linear-gradient(135deg, var(--cv-purple-start) 0%, var(--cv-purple-end) 100%);
     border: none;
     color: #ffffff !important;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(168, 85, 247, 0.2);
     transition: all 0.2s ease-in-out;
 }
+
 .btn-cv-secondary:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(168, 85, 247, 0.3);
+    opacity: 0.94;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(168, 85, 247, 0.35);
 }
 
-/* 🔴 Botones de acción crítica (Eliminar/Salir) — acento rojo */
+/* 🔴 Botón de peligro personal (#ff4757) */
+.btn-danger-personal,
 .btn-cv-danger {
-    background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
-    border: none;
+    background: var(--accent-red);
     color: #ffffff !important;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    border: none;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.25);
+    padding: 0.5rem 1.25rem;
+    box-shadow: 0 3px 10px rgba(255, 71, 87, 0.25);
     transition: all 0.2s ease-in-out;
-}
-.btn-cv-danger:hover {
-    opacity: 0.92;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(255, 71, 87, 0.35);
 }
 
-/* 🔴 Botón de eliminación personal — fondo rojo #ff4757 */
-.btn-danger-personal {
-    background: #ff4757;
-    border: none;
-    color: #ffffff !important;
-    font-weight: 600;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(255, 71, 87, 0.28);
-    transition: all 0.2s ease-in-out;
-}
-.btn-danger-personal:hover {
-    background: #c0392b;
-    transform: translateY(-1px);
+.btn-danger-personal:hover,
+.btn-cv-danger:hover {
+    background: var(--accent-red-dark);
+    transform: translateY(-2px);
     box-shadow: 0 5px 14px rgba(255, 71, 87, 0.4);
+    color: #ffffff !important;
 }
 
 /* ==========================================================================
-   Cards
+   Cards y Contenedores
    ========================================================================== */
-
-/* Cards estándar */
 .card-custom {
     border: none;
     border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    background: #ffffff;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .card-custom:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
 }
 
-/* 🔴 Borde izquierdo de las cards destacadas — acento rojo */
+/* 🔴 Card destacada con borde rojo lateral (#ff4757) */
+.card-featured,
 .card-highlight {
-    border-left: 4px solid #ff4757 !important;
+    border-left: 4px solid var(--accent-red) !important;
     border-radius: 12px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
-/* ==========================================================================
-   Cards de Habilidades (lista de competencias)
-   ========================================================================== */
-
-/* Base común de la card de habilidad */
+/* Cards de Habilidades */
 .skill-card {
     border: 1px solid #e2e8f0;
     border-radius: 12px;
@@ -176,19 +186,20 @@ h1, h2, h3, h4, h5, h6,
     border-left-style: solid;
     height: 100%;
 }
+
 .skill-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
 }
 
-/* 🔴 Power Skills → borde izquierdo rojo (marca personal) */
+/* 🔴 Power Skills → Borde rojo marca personal */
 .skill-card-power {
-    border-left-color: #ff4757;
+    border-left-color: var(--accent-red);
 }
 
-/* Hard Skills → borde izquierdo azul (firma visual) */
+/* Hard Skills → Borde azul firma visual */
 .skill-card-hard {
-    border-left-color: #1171ef;
+    border-left-color: var(--primary-blue-end);
 }
 
 /* ==========================================================================
@@ -202,45 +213,53 @@ h1, h2, h3, h4, h5, h6,
     letter-spacing: 0.3px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-.badge-cv-blue   { background: linear-gradient(135deg, #11cdef 0%, #1171ef 100%); color: #fff; }
-.badge-cv-green  { background: linear-gradient(135deg, #11f577 0%, #0ba85d 100%); color: #fff; }
-.badge-cv-purple { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); color: #fff; }
-.badge-cv-amber  { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); color: #fff; }
 
-/* 🔴 Badges de notificaciones importantes — acento rojo */
-.badge-cv-danger {
-    background: linear-gradient(135deg, #ff6b81 0%, #ff4757 100%);
-    color: #ffffff;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
-}
+.badge-cv-blue   { background: linear-gradient(135deg, var(--primary-blue-start), var(--primary-blue-end)); color: #fff; }
+.badge-cv-green  { background: linear-gradient(135deg, var(--success-green-start), var(--success-green-end)); color: #fff; }
+.badge-cv-purple { background: linear-gradient(135deg, var(--cv-purple-start), var(--cv-purple-end)); color: #fff; }
+.badge-cv-danger { background: var(--accent-red); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3); }
 
 /* ==========================================================================
-   Footer — Firma precedida por rombo ◆
+   Footer con Firma Visual y Rombo ◆
    ========================================================================== */
+.footer-signature,
 .cv-footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #64748b;
+    font-size: 0.9em;
     background-color: #ffffff;
     border-top: 1px solid #e2e8f0;
-    color: #64748b;
 }
+
+.footer-signature .brand-name,
+.cv-footer .brand-name,
 .cv-footer .signature {
-    font-weight: 500;
+    color: var(--accent-red);
+    font-weight: 700;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
 }
-/* Firma personal precedida por un rombo (◆) */
+
+.footer-signature .brand-name::before,
 .cv-footer .signature::before {
-    content: "◆";
-    color: var(--cv-red);
-    margin-right: 0.45rem;
-    font-size: 0.7rem;
-    vertical-align: middle;
+    content: "◆ ";
+    color: var(--accent-red);
+    font-style: normal;
 }
 
 /* ==========================================================================
-   Errores de formulario
+   Formularios y Validaciones
    ========================================================================== */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-blue-end);
+    box-shadow: 0 0 0 0.2rem rgba(17, 113, 239, 0.15);
+}
+
 .error {
     color: #dc3545;
-    font-size: 0.875rem;
+    font-size: 0.84rem;
     margin-top: 0.25rem;
     font-weight: 500;
 }

@@ -5,35 +5,54 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-7 col-lg-6">
-        <div class="card card-custom p-4">
+        <!-- 
+            🔴 Firma Visual v2.0:
+            Se añade la clase .card-featured si la habilidad es de tipo 'power' (Power Skill),
+            lo cual inyecta el borde rojo lateral (#ff4757).
+            Dinámicamente se evalúa con: {% if form.tipo.value == 'power' or object.tipo == 'power' %}card-featured{% endif %}
+            o inyectando 'card_featured_class' desde el contexto de la vista.
+        -->
+        <div class="card card-custom p-4 {% if form.tipo.value == 'power' or object.tipo == 'power' %}card-featured{% endif %}">
             <h3 class="fw-bold mb-3">
                 <i class="fa-solid fa-code text-primary me-2"></i>
                 {% if object %}Editar Habilidad{% else %}Nueva Habilidad / Competencia{% endif %}
             </h3>
 
-            <form method="post" id="habilidadForm">
+            <form method="post" id="habilidadForm" novalidate>
                 {% csrf_token %}
 
+                <!-- Nombre de la Habilidad -->
                 <div class="mb-3">
                     <label for="id_nombre" class="form-label fw-semibold">Nombre de la Habilidad <span class="text-danger">*</span></label>
-                    <input type="text" name="nombre" id="id_nombre" class="form-control" value="{{ form.nombre.value|default:'' }}" required placeholder="Ej: Python, Django, SQL, Scrum, Liderazgo">
+                    <input type="text"
+                           name="nombre"
+                           id="id_nombre"
+                           class="form-control {% if form.nombre.errors %}is-invalid{% endif %}"
+                           value="{{ form.nombre.value|default:'' }}"
+                           maxlength="100"
+                           required
+                           placeholder="Ej: Python, Django, SQL, Scrum, Liderazgo">
                     {% if form.nombre.errors %}<div class="error">{{ form.nombre.errors.0 }}</div>{% endif %}
                 </div>
 
+                <!-- Tipo de Habilidad -->
                 <div class="mb-3">
                     <label for="id_tipo" class="form-label fw-semibold">Tipo de Habilidad <span class="text-danger">*</span></label>
-                    <select name="tipo" id="id_tipo" class="form-select" required>
+                    <select name="tipo" id="id_tipo" class="form-select {% if form.tipo.errors %}is-invalid{% endif %}" required>
                         <option value="hard" {% if form.tipo.value == 'hard' or not form.tipo.value %}selected{% endif %}>Hard Skills (técnicas)</option>
-                        <option value="power" {% if form.tipo.value == 'power' %}selected{% endif %}>Power Skills (blandas)</option>
+                        <option value="power" {% if form.tipo.value == 'power' %}selected{% endif %}>Power Skills (blandas / personales)</option>
                     </select>
                     {% if form.tipo.errors %}<div class="error">{{ form.tipo.errors.0 }}</div>{% endif %}
-                    <div class="form-text">Las <strong>Hard Skills</strong> son competencias técnicas y las <strong>Power Skills</strong> son habilidades personales/interpersonales.</div>
+                    <div class="form-text">
+                        Las <strong>Hard Skills</strong> son competencias técnicas (azul) y las <strong>Power Skills</strong> son habilidades interpersonales (acento rojo).
+                    </div>
                 </div>
 
+                <!-- Nivel de Dominio -->
                 <div class="mb-3">
-                    <label for="id_nivel" class="form-label fw-semibold">Nivel de Dominio (1 = Básico, 5 = Experto)</label>
-                    <select name="nivel" id="id_nivel" class="form-select">
-                        <option value="1" {% if form.nivel.value == 1 %}selected{% endif %}>1 — Principiante / Conocimiento Básico</option>
+                    <label for="id_nivel" class="form-label fw-semibold">Nivel de Dominio (1 = Básico, 5 = Experto) <span class="text-danger">*</span></label>
+                    <select name="nivel" id="id_nivel" class="form-select {% if form.nivel.errors %}is-invalid{% endif %}" required>
+                        <option value="1" {% if form.nivel.value == 1 %}selected{% endif %}>1 — Principiante / Básico</option>
                         <option value="2" {% if form.nivel.value == 2 %}selected{% endif %}>2 — Intermedio Bajo</option>
                         <option value="3" {% if form.nivel.value == 3 or not form.nivel.value %}selected{% endif %}>3 — Competente / Intermedio Alto</option>
                         <option value="4" {% if form.nivel.value == 4 %}selected{% endif %}>4 — Avanzado</option>
@@ -42,6 +61,7 @@
                     {% if form.nivel.errors %}<div class="error">{{ form.nivel.errors.0 }}</div>{% endif %}
                 </div>
 
+                <!-- Categorías Asociadas -->
                 <div class="mb-4">
                     <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 gap-2">
                         <label class="form-label fw-semibold mb-0">Categorías Asociadas (Opcional)</label>
@@ -66,13 +86,23 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center">
+                <!-- Botones de Acción con Firma Visual v2.0 -->
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
                     <a href="{% url 'perfil:habilidad_lista' %}" class="btn btn-outline-secondary px-3">
-                        <i class="fa-solid fa-arrow-left me-1"></i> Cancelar
+                        <i class="fa-solid fa-arrow-left me-1"></i> Volver a la lista
                     </a>
-                    <button type="submit" class="btn btn-cv-primary px-4 py-2">
-                        <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Habilidad
-                    </button>
+                    <div class="d-flex gap-2">
+                        {% if object %}
+                        <!-- Botón Eliminar con clase obligatoria .btn-danger-personal (#ff4757) -->
+                        <a href="{% url 'perfil:habilidad_eliminar' object.pk %}" class="btn btn-danger-personal px-3">
+                            <i class="fa-solid fa-trash-can me-1"></i> Eliminar
+                        </a>
+                        {% endif %}
+                        <!-- Botón Guardar con clase obligatoria .btn-primary-signature (Gradiente verde) -->
+                        <button type="submit" class="btn btn-primary-signature px-4 py-2">
+                            <i class="fa-solid fa-floppy-disk me-1"></i> Guardar Habilidad
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -93,15 +123,26 @@
             $checkboxes.prop('checked', false);
         });
 
+        // Validación en tiempo real con jQuery Validate
         $('#habilidadForm').validate({
             rules: {
-                nombre: { required: true, maxlength: 100 }
+                nombre: { required: true, maxlength: 100 },
+                tipo: { required: true },
+                nivel: { required: true }
             },
             messages: {
-                nombre: { required: "El nombre de la habilidad es obligatorio." }
+                nombre: { required: "El nombre de la habilidad es obligatorio." },
+                tipo: { required: "Selecciona el tipo de habilidad." },
+                nivel: { required: "Selecciona el nivel de dominio." }
             },
             errorElement: 'div',
-            errorClass: 'error'
+            errorClass: 'error',
+            highlight: function(element) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element) {
+                $(element).removeClass('is-invalid');
+            }
         });
     });
 </script>

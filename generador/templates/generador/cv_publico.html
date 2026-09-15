@@ -4,36 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum Vitae — {{ perfil.nombre_completo }}</title>
-    <!-- Google Fonts: Outfit (Titulares) e Inter (Cuerpo) -->
+    
+    <!-- Google Fonts: Poppins (Titulares/Marca) y Roboto (Cuerpo) — Firma Visual v2.0 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome 6 Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* ==========================================================================
+           FIRMA VISUAL v2.0 — VARIABLES Y REGLAS DE DISEÑO (80/15/5)
+           ========================================================================== */
         :root {
+            /* Primario: Gradiente Azul Firma */
             --cv-blue-start: #11cdef;
             --cv-blue-end: #1171ef;
+            --cv-blue: #1171ef;
+            
+            /* Secundario: Gradiente Verde Acción */
             --cv-green-start: #11f577;
             --cv-green-end: #0ba85d;
-            --cv-purple-start: #a855f7;
-            --cv-purple-end: #ec4899;
+            
+            /* 🔴 Marca Personal: Acento Rojo Estratégico (Regla 5%) */
+            --cv-red-accent: #ff4757;
+            --cv-red-hover: #c0392b;
+            
+            /* Neutros */
             --cv-dark: #0f172a;
+            --cv-slate-800: #1e293b;
             --cv-slate-600: #475569;
             --cv-slate-100: #f1f5f9;
+            --cv-bg-paper: #ffffff;
+            --cv-border-light: #e2e8f0;
         }
 
-        /* Reducir la base de "rem" un poco: escala todo lo que use rem
-           (paddings, márgenes, tipografía) sin tener que tocar cada valor. */
         html {
             font-size: 15px;
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
             color: #334155;
             background-color: #cbd5e1;
             margin: 0;
@@ -41,58 +55,66 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Contenedor Principal Hoja A4 / Carta */
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --------------------------------------------------------------------------
+           CONTENEDOR HOJA DE VIDA (A4 / CARTA)
+           -------------------------------------------------------------------------- */
         .cv-paper {
-            max-width: 920px;
+            max-width: 960px;
             margin: 30px auto;
-            background: #ffffff;
+            background: var(--cv-bg-paper);
             box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
             border-radius: 16px;
             overflow: hidden;
         }
 
-        /* Banner de Encabezado - Firma Visual Gradiente Azul */
+        /* --------------------------------------------------------------------------
+           1. HEADER DEL CV: GRADIENTE AZUL + MARCA PERSONAL LO EN ROJO (#ff4757)
+           -------------------------------------------------------------------------- */
         .cv-hero-banner {
             background: linear-gradient(135deg, var(--cv-blue-start) 0%, var(--cv-blue-end) 100%);
             color: #ffffff;
-            padding: 1.75rem 2.25rem;
+            padding: 2rem 2.5rem;
             position: relative;
         }
 
         .cv-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
             letter-spacing: -0.5px;
-            line-height: 1.1;
-            margin-bottom: 0.2rem;
+            line-height: 1.15;
+            margin-bottom: 0.35rem;
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.12);
         }
 
         .cv-title-pill {
             display: inline-block;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
-            background: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(8px);
-            padding: 0.3rem 1rem;
+            padding: 0.35rem 1.1rem;
             border-radius: 50rem;
             color: #ffffff;
-            margin-bottom: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.35);
         }
 
         .cv-contact-bar {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.8rem;
-            opacity: 0.95;
-            border-top: 1px solid rgba(255, 255, 255, 0.25);
-            padding-top: 0.6rem;
-            margin-top: 0.25rem;
+            gap: 1.25rem;
+            font-size: 0.84rem;
+            opacity: 0.96;
+            border-top: 1px solid rgba(255, 255, 255, 0.28);
+            padding-top: 0.75rem;
+            margin-top: 0.35rem;
         }
 
         .cv-contact-item {
@@ -105,218 +127,278 @@
         .cv-contact-item a {
             color: #ffffff;
             text-decoration: none;
+            transition: opacity 0.15s;
         }
 
-        /* Badge de Iniciales del Perfil */
-        .cv-avatar-badge {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            display: flex;
+        .cv-contact-item a:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+        }
+
+        /* Logo Personal con Iniciales "LO" en Rojo (#ff4757) */
+        .cv-brand-emblem {
+            background: #ffffff;
+            color: var(--cv-red-accent);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            padding: 0.4rem 0.9rem;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 71, 87, 0.25);
+            line-height: 1;
         }
 
-        /* Fotografía del Perfil en el Encabezado */
         .cv-photo {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.7);
+            border: 3px solid rgba(255, 255, 255, 0.9);
             object-fit: cover;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
         }
 
-        /* Cuerpo del CV: padding reducido para ganar espacio vertical */
+        /* --------------------------------------------------------------------------
+           2. SECCIONES DEL CV Y LAYOUT DE 2 COLUMNAS (DESKTOP)
+           -------------------------------------------------------------------------- */
         .cv-main {
-            padding: 1.1rem 1.75rem;
+            padding: 1.75rem 2.25rem;
         }
 
-        /* Secciones: separación reducida entre bloques */
-        .cv-section {
-            margin-bottom: 0.9rem;
-        }
-
-        .cv-section:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Títulos de Sección */
+        /* Títulos con borde inferior azul (#1171ef) de 2px e icono */
         .cv-section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--cv-blue-end);
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.3rem;
-            margin-bottom: 0.6rem;
+            letter-spacing: 0.8px;
+            color: var(--cv-blue);
+            border-bottom: 2px solid var(--cv-blue);
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.9rem;
             display: flex;
             align-items: center;
             gap: 0.6rem;
         }
 
+        .cv-section {
+            margin-bottom: 1.4rem;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
         /* Resumen Profesional Box */
         .cv-summary-box {
             background-color: #f8fafc;
-            border-left: 4px solid var(--cv-blue-end);
-            padding: 0.75rem 1rem;
-            border-radius: 0 12px 12px 0;
-            font-size: 0.85rem;
-            line-height: 1.45;
+            border-left: 4px solid var(--cv-blue);
+            padding: 0.9rem 1.1rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.88rem;
+            line-height: 1.55;
             color: var(--cv-slate-600);
         }
 
         /* Timeline de Experiencia Laboral */
         .cv-timeline {
             position: relative;
-            padding-left: 1.25rem;
+            padding-left: 1.3rem;
             border-left: 2px solid #cbd5e1;
         }
 
         .cv-timeline-item {
             position: relative;
-            margin-bottom: 0.85rem;
+            margin-bottom: 1.1rem;
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
 
         .cv-timeline-item:last-child {
             margin-bottom: 0;
         }
 
-        .cv-timeline-item h4 {
-            font-size: 1rem;
-        }
-
-        .cv-timeline-item .cv-empresa {
-            font-size: 0.85rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .cv-timeline-item .cv-descripcion {
-            font-size: 0.78rem;
-            line-height: 1.4;
-        }
-
         .cv-timeline-dot {
             position: absolute;
-            left: calc(-1.25rem - 7px);
+            left: calc(-1.3rem - 6px);
             top: 4px;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            background: var(--cv-blue-end);
+            background: var(--cv-blue);
             border: 2px solid #ffffff;
             box-shadow: 0 0 0 3px rgba(17, 113, 239, 0.25);
         }
 
-        /* Educación: tarjetas más compactas */
+        .cv-timeline-item h4 {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--cv-dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .cv-timeline-item .cv-empresa {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--cv-blue);
+            margin-bottom: 0.35rem;
+        }
+
+        .cv-timeline-item .cv-descripcion {
+            font-size: 0.82rem;
+            line-height: 1.45;
+            color: var(--cv-slate-600);
+        }
+
+        /* Tarjetas de Educación */
         .cv-edu-card {
-            padding: 0.6rem 0.85rem;
+            background: #f8fafc;
+            border-left: 4px solid var(--cv-blue);
+            border-radius: 0 10px 10px 0;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.65rem;
+            break-inside: avoid;
+            page-break-inside: avoid;
         }
 
         .cv-edu-card h6 {
-            font-size: 0.88rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--cv-dark);
         }
 
         .cv-edu-card .cv-institucion {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
+            color: var(--cv-slate-600);
         }
 
-        .cv-edu-card .cv-edu-desc {
-            font-size: 0.76rem;
-        }
-
-        /* Badges de Habilidades (Firma Verde) */
-        .badge-skill-tag {
-            background: linear-gradient(135deg, var(--cv-green-start) 0%, var(--cv-green-end) 100%);
-            color: #ffffff !important;
-            font-weight: 600;
-            padding: 0.35em 0.8em;
-            border-radius: 50rem;
-            font-size: 0.78rem;
-            box-shadow: 0 3px 10px rgba(11, 168, 93, 0.22);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        /* Rejilla de Habilidades: filas y columnas ordenadas (Power/Hard Skills) */
-        .cv-skill-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 0.4rem;
-        }
-
-        .cv-skill-cell {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid var(--cv-green-end);
+        /* 🔴 Power Skills: Badge con borde rojo (#ff4757) sutil */
+        .cv-skill-power {
+            background: #fff5f5;
+            border: 1.5px solid var(--cv-red-accent);
+            color: #b91c1c;
             border-radius: 8px;
-            padding: 0.35rem 0.6rem;
+            padding: 0.45rem 0.65rem;
             font-size: 0.8rem;
-            font-weight: 500;
-            color: #334155;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+            box-shadow: 0 2px 5px rgba(255, 71, 87, 0.08);
+            break-inside: avoid;
         }
 
-        /* Idiomas: tarjetas compactas */
-        .cv-idioma-card {
-            padding: 0.4rem 0.7rem;
+        .cv-skill-power .skill-icon {
+            color: var(--cv-red-accent);
+            margin-right: 0.35rem;
         }
 
-        /* Badges de Categoría (Firma Magenta) */
-        .badge-cat-tag {
-            background: linear-gradient(135deg, var(--cv-purple-start) 0%, var(--cv-purple-end) 100%);
-            color: #ffffff !important;
+        /* 🔵 Hard Skills: Badge con borde azul (#1171ef) */
+        .cv-skill-hard {
+            background: #f0f7ff;
+            border: 1.5px solid var(--cv-blue);
+            color: #1e40af;
+            border-radius: 8px;
+            padding: 0.45rem 0.65rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            padding: 0.35em 0.8em;
-            border-radius: 50rem;
-            font-size: 0.76rem;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.45rem;
+            box-shadow: 0 2px 5px rgba(17, 113, 239, 0.08);
+            break-inside: avoid;
         }
 
-        /* Botón de Firma Verde */
-        .btn-cv-primary {
+        .cv-skill-hard .skill-icon {
+            color: var(--cv-blue);
+            margin-right: 0.35rem;
+        }
+
+        /* Idiomas */
+        .cv-idioma-box {
+            background: #f8fafc;
+            border: 1px solid var(--cv-border-light);
+            border-left: 3px solid var(--cv-blue);
+            border-radius: 6px;
+            padding: 0.45rem 0.75rem;
+            margin-bottom: 0.45rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            break-inside: avoid;
+        }
+
+        /* --------------------------------------------------------------------------
+           3. BOTONES DE ACCIÓN (FIRMA VISUAL VERDE Y BOTÓN VOLVER)
+           -------------------------------------------------------------------------- */
+        .btn-cv-action {
             background: linear-gradient(135deg, var(--cv-green-start) 0%, var(--cv-green-end) 100%);
             border: none;
             color: #ffffff !important;
-            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
             border-radius: 8px;
             padding: 0.5rem 1.25rem;
-            box-shadow: 0 4px 12px rgba(11, 168, 93, 0.3);
-            transition: transform 0.15s;
+            box-shadow: 0 4px 12px rgba(11, 168, 93, 0.28);
+            transition: transform 0.15s, opacity 0.15s;
         }
 
-        .btn-cv-primary:hover {
+        .btn-cv-action:hover {
             transform: translateY(-1px);
+            opacity: 0.94;
         }
 
-        /* Tarjeta de Anexos Completos */
-        .cv-annex-card {
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            margin-bottom: 2rem;
-            page-break-inside: avoid;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        .btn-cv-outline-light {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: transparent;
+            color: #ffffff !important;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 0.45rem 1rem;
+            transition: background 0.15s;
         }
 
-        .cv-page-break {
-            page-break-before: always;
-            margin-top: 3rem;
-            padding-top: 2rem;
+        .btn-cv-outline-light:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --------------------------------------------------------------------------
+           4. ANEXOS Y CERTIFICADOS PDF VISIBLES
+           -------------------------------------------------------------------------- */
+        .cv-annex-section {
             border-top: 3px double #cbd5e1;
+            margin-top: 2rem;
+            padding-top: 1.75rem;
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .cv-annex-card {
+            border: 1px solid var(--cv-border-light);
+            border-radius: 12px;
+            padding: 1.25rem;
+            background-color: #ffffff;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .badge-cat-tag {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            color: #ffffff !important;
+            font-weight: 600;
+            padding: 0.3em 0.75em;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+            display: inline-block;
         }
 
         .pdf-canvas-render {
@@ -325,45 +407,103 @@
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            margin-top: 1rem;
+            margin-top: 0.75rem;
         }
 
-        /* Reglas de Impresión / PDF */
+        /* --------------------------------------------------------------------------
+           5. FOOTER DEL CV: TEXTO ROJO CENTRADO (#ff4757)
+           -------------------------------------------------------------------------- */
+        .cv-footer {
+            border-top: 1px solid #e2e8f0;
+            padding: 1.1rem 0;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .cv-footer-signature {
+            color: var(--cv-red-accent) !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* --------------------------------------------------------------------------
+           6. OPTIMIZACIÓN CRÍTICA PARA IMPRESIÓN / PDF (@media print)
+           -------------------------------------------------------------------------- */
         @media print {
             .no-print {
                 display: none !important;
             }
+
             body {
                 background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 13px !important;
             }
+
+            @page {
+                size: A4 portrait;
+                margin: 8mm 8mm 8mm 8mm;
+            }
+
             .cv-paper {
-                box-shadow: none !important;
-                margin: 0 !important;
                 max-width: 100% !important;
+                margin: 0 !important;
                 border-radius: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
             }
+
             .cv-hero-banner {
+                padding: 1.25rem 1.5rem !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .badge-skill-tag, .badge-cat-tag {
+
+            .cv-main {
+                padding: 1rem 1.25rem !important;
+            }
+
+            /* Forzar colores de fondo e iconos */
+            .cv-hero-banner,
+            .cv-skill-power,
+            .cv-skill-hard,
+            .cv-summary-box,
+            .cv-edu-card,
+            .cv-idioma-box,
+            .cv-brand-emblem,
+            .badge-cat-tag {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            .cv-page-break {
+
+            /* Evitar saltos de página partidos */
+            .cv-section,
+            .cv-timeline-item,
+            .cv-edu-card,
+            .cv-skill-power,
+            .cv-skill-hard,
+            .cv-annex-card {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .cv-annex-section {
                 page-break-before: always !important;
+                break-before: page !important;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Control Panel Top Bar (Oculta al imprimir/descargar) -->
+    <!-- Control Topbar de Navegación / Acciones (Oculta al imprimir/descargar) -->
     <nav class="no-print bg-dark py-3 text-white sticky-top shadow-lg">
         <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div class="d-flex align-items-center gap-2">
                 <span class="badge bg-secondary fs-6 font-monospace px-3 py-2 rounded-pill">
-                    <i class="fa-solid fa-globe me-1"></i> CV Profesional
+                    <i class="fa-solid fa-globe me-1"></i> CV Profesional Público
                 </span>
                 {% if request.user.is_authenticated %}
                 <a href="{% url 'core:dashboard' %}" class="btn btn-sm btn-outline-info rounded-pill px-3">
@@ -371,13 +511,16 @@
                 </a>
                 {% endif %}
             </div>
+            
             <div class="d-flex align-items-center gap-2">
-                <button onclick="descargarPDF(this)" class="btn btn-cv-primary btn-sm">
-                    <i class="fa-solid fa-download me-1"></i> Descargar PDF Completo
+                <!-- Botón de Acción Principal: Gradiente Verde Firma -->
+                <button onclick="descargarPDF(this)" class="btn btn-cv-action btn-sm">
+                    <i class="fa-solid fa-file-arrow-down me-1"></i> Descargar PDF Completo
                 </button>
                 <button onclick="window.print()" class="btn btn-sm btn-light fw-bold rounded-2 px-3">
                     <i class="fa-solid fa-print me-1"></i> Imprimir / Nativo
                 </button>
+
                 {% if request.user.is_authenticated %}
                 <form method="post" action="{% url 'core:logout' %}" class="m-0 d-inline">
                     {% csrf_token %}
@@ -386,7 +529,7 @@
                     </button>
                 </form>
                 {% else %}
-                <a href="{% url 'core:login' %}" class="btn btn-sm btn-outline-light rounded-pill px-3">
+                <a href="{% url 'core:login' %}" class="btn btn-sm btn-cv-outline-light rounded-pill px-3">
                     <i class="fa-solid fa-arrow-right-to-bracket me-1"></i> Iniciar Sesión
                 </a>
                 <a href="{% url 'core:registro' %}" class="btn btn-sm btn-outline-info rounded-pill px-3">
@@ -400,7 +543,7 @@
     <!-- Contenedor Principal de la Hoja de Vida (Imprimible/Descargable) -->
     <div class="cv-paper" id="cvPaper">
 
-        <!-- Banner de Encabezado con Firma Visual Azul -->
+        <!-- 1. HEADER DEL CV (Gradiente Azul + Marca LO en Rojo) -->
         <header class="cv-hero-banner">
             <div class="row align-items-center">
                 <div class="col-md-9">
@@ -419,8 +562,8 @@
                         {% if perfil.linkedin %}
                         <span class="cv-contact-item">
                             <i class="fa-brands fa-linkedin opacity-75"></i>
-                            {% if "linkedin" in perfil.linkedin %}
-                            <a href="{{ perfil.linkedin }}">{{ perfil.linkedin }}</a>
+                            {% if "http" in perfil.linkedin %}
+                            <a href="{{ perfil.linkedin }}" target="_blank">{{ perfil.linkedin }}</a>
                             {% else %}
                             {{ perfil.linkedin }}
                             {% endif %}
@@ -434,148 +577,156 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 text-md-end mt-2 mt-md-0 d-none d-md-block">
+                <div class="col-md-3 text-md-end mt-3 mt-md-0 d-flex flex-column align-items-md-end align-items-start gap-2">
+                    <!-- Marca Personal LO en Rojo (#ff4757) -->
+                    <div class="cv-brand-emblem" title="Firma Personal">
+                        LO
+                    </div>
+
                     {% if perfil.foto_efectiva %}
                     <img src="{{ perfil.foto_efectiva }}"
                          alt="Foto de {{ perfil.nombre_completo }}"
-                         class="cv-photo ms-auto"
+                         class="cv-photo"
                          crossorigin="anonymous">
-                    {% else %}
-                    <div class="cv-avatar-badge ms-auto">
-                        {{ perfil.nombre_completo|slice:":1"|upper }}
-                    </div>
                     {% endif %}
                 </div>
             </div>
         </header>
 
-        <!-- Cuerpo del CV -->
+        <!-- 2. CUERPO DEL CV: LAYOUT DE 2 COLUMNAS EN DESKTOP (Sidebar Izquierda + Contenido Principal) -->
         <main class="cv-main">
+            <div class="row g-4">
 
-            <!-- Resumen Profesional -->
-            {% if perfil.resumen_profesional %}
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-user-tie"></i> Resumen Profesional
-                </h2>
-                <div class="cv-summary-box">
-                    {{ perfil.resumen_profesional|linebreaksbr }}
-                </div>
-            </section>
-            {% endif %}
-
-            <!-- Experiencia Laboral -->
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-briefcase"></i> Experiencia Laboral
-                </h2>
-
-                <div class="cv-timeline">
-                    {% for exp in experiencias %}
-                    <div class="cv-timeline-item">
-                        <div class="cv-timeline-dot"></div>
-                        <div class="d-flex justify-content-between align-items-baseline flex-wrap mb-1">
-                            <h4 class="fw-bold text-dark mb-0">{{ exp.cargo }}</h4>
-                            <span class="badge bg-slate-100 text-dark border px-3 py-1 rounded-pill small">
-                                {{ exp.fecha_inicio|date:"M Y" }} — {% if exp.actual %}Presente{% else %}{{ exp.fecha_fin|date:"M Y" }}{% endif %}
-                            </span>
-                        </div>
-                        <div class="text-primary fw-semibold cv-empresa"><i class="fa-regular fa-building me-1"></i> {{ exp.empresa }}</div>
-                        {% if exp.descripcion %}
-                        <div class="text-secondary cv-descripcion">{{ exp.descripcion|linebreaksbr }}</div>
-                        {% endif %}
-                    </div>
-                    {% empty %}
-                    <p class="text-muted small">No se ha registrado experiencia laboral.</p>
-                    {% endfor %}
-                </div>
-            </section>
-
-            <!-- Educación & Formación -->
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-graduation-cap"></i> Educación y Formación Académica
-                </h2>
-                <div class="row g-2">
-                    {% for edu in educaciones %}
-                    <div class="col-12">
-                        <div class="bg-light rounded-3 border-start border-4 border-primary cv-edu-card">
-                            <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-2">
-                                <h6 class="fw-bold mb-1 text-dark">{{ edu.titulo }}</h6>
-                                <span class="text-muted small font-monospace">{{ edu.fecha_inicio|date:"Y" }} — {{ edu.fecha_fin|date:"Y"|default:"Presente" }}</span>
+                <!-- COLUMNA IZQUIERDA (Sidebar: Habilidades, Idiomas, Competencias) -->
+                <aside class="col-12 col-lg-4 col-md-5 order-2 order-md-1">
+                    
+                    <!-- Power Skills (Borde Rojo #ff4757) -->
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-bolt" style="color: var(--cv-red-accent);"></i> Power Skills
+                        </h2>
+                        {% if habilidades_power %}
+                            {% for hab in habilidades_power %}
+                            <div class="cv-skill-power">
+                                <span><i class="fa-solid fa-star skill-icon"></i> {{ hab.nombre }}</span>
+                                {% if hab.nivel %}<small class="text-muted fw-bold">({{ hab.nivel }}/5)</small>{% endif %}
                             </div>
-                            <div class="text-secondary fw-medium cv-institucion">{{ edu.institucion }}</div>
-                            {% if edu.descripcion %}
-                            <div class="text-muted cv-edu-desc mt-1">{{ edu.descripcion }}</div>
-                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted small">No se han registrado Power Skills.</p>
+                        {% endif %}
+                    </section>
+
+                    <!-- Hard Skills (Borde Azul #1171ef) -->
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-code text-primary"></i> Hard Skills
+                        </h2>
+                        {% if habilidades_hard %}
+                            {% for hab in habilidades_hard %}
+                            <div class="cv-skill-hard">
+                                <span><i class="fa-solid fa-check skill-icon"></i> {{ hab.nombre }}</span>
+                                {% if hab.nivel %}<small class="text-muted fw-bold">({{ hab.nivel }}/5)</small>{% endif %}
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-muted small">No se han registrado Hard Skills.</p>
+                        {% endif %}
+                    </section>
+
+                    <!-- Idiomas -->
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-language text-primary"></i> Idiomas
+                        </h2>
+                        {% for idm in idiomas %}
+                        <div class="cv-idioma-box">
+                            <span class="fw-semibold text-dark">{{ idm.idioma }}</span>
+                            <span class="badge bg-primary text-white rounded-pill">{{ idm.nivel }}</span>
                         </div>
-                    </div>
-                    {% empty %}
-                    <div class="col-12"><p class="text-muted small">No se ha registrado educación.</p></div>
-                    {% endfor %}
-                </div>
-            </section>
+                        {% empty %}
+                        <p class="text-muted small">No se han registrado idiomas.</p>
+                        {% endfor %}
+                    </section>
 
-            <!-- Habilidades: Power Skills y Hard Skills organizadas en filas/columnas -->
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-star"></i> Power Skills
-                </h2>
-                {% if habilidades_power %}
-                <div class="cv-skill-grid">
-                    {% for hab in habilidades_power %}
-                    <div class="cv-skill-cell">
-                        <i class="fa-solid fa-check text-success me-1"></i> {{ hab.nombre }}
-                        {% if hab.nivel %}<small class="text-muted">({{ hab.nivel }}/5)</small>{% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <p class="text-muted small">No se han registrado Power Skills.</p>
-                {% endif %}
-            </section>
+                </aside>
 
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-code"></i> Hard Skills
-                </h2>
-                {% if habilidades_hard %}
-                <div class="cv-skill-grid">
-                    {% for hab in habilidades_hard %}
-                    <div class="cv-skill-cell">
-                        <i class="fa-solid fa-check text-success me-1"></i> {{ hab.nombre }}
-                        {% if hab.nivel %}<small class="text-muted">({{ hab.nivel }}/5)</small>{% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% else %}
-                <p class="text-muted small">No se han registrado Hard Skills.</p>
-                {% endif %}
-            </section>
+                <!-- COLUMNA DERECHA (Contenido Principal: Resumen, Experiencia, Educación) -->
+                <div class="col-12 col-lg-8 col-md-7 order-1 order-md-2">
 
-            <!-- Idiomas -->
-            <section class="cv-section">
-                <h2 class="cv-section-title">
-                    <i class="fa-solid fa-language"></i> Idiomas
-                </h2>
-                <div class="row g-2">
-                    {% for idm in idiomas %}
-                    <div class="col-sm-6 col-md-4">
-                        <div class="bg-light rounded-3 d-flex justify-content-between align-items-center border cv-idioma-card">
-                            <span class="fw-semibold small text-dark me-2">{{ idm.idioma }}</span>
-                            <span class="badge bg-primary text-white px-2 py-1 rounded-pill small">{{ idm.nivel }}</span>
+                    <!-- Resumen Profesional -->
+                    {% if perfil.resumen_profesional %}
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-user-tie text-primary"></i> Resumen Profesional
+                        </h2>
+                        <div class="cv-summary-box">
+                            {{ perfil.resumen_profesional|linebreaksbr }}
                         </div>
-                    </div>
-                    {% empty %}
-                    <div class="col-12"><p class="text-muted small">No se han registrado idiomas.</p></div>
-                    {% endfor %}
-                </div>
-            </section>
+                    </section>
+                    {% endif %}
 
-            <!-- Sección de Anexos y Certificados PDF (renderizados en Canvases de Alta Resolución) -->
+                    <!-- Experiencia Laboral -->
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-briefcase text-primary"></i> Experiencia Laboral
+                        </h2>
+
+                        <div class="cv-timeline">
+                            {% for exp in experiencias %}
+                            <div class="cv-timeline-item">
+                                <div class="cv-timeline-dot"></div>
+                                <div class="d-flex justify-content-between align-items-baseline flex-wrap mb-1">
+                                    <h4 class="mb-0">{{ exp.cargo }}</h4>
+                                    <span class="badge bg-slate-100 text-dark border px-2 py-1 rounded-pill small">
+                                        {{ exp.fecha_inicio|date:"M Y" }} — {% if exp.actual %}Presente{% else %}{{ exp.fecha_fin|date:"M Y" }}{% endif %}
+                                    </span>
+                                </div>
+                                <div class="cv-empresa">
+                                    <i class="fa-regular fa-building me-1"></i> {{ exp.empresa }}
+                                </div>
+                                {% if exp.descripcion %}
+                                <div class="cv-descripcion">{{ exp.descripcion|linebreaksbr }}</div>
+                                {% endif %}
+                            </div>
+                            {% empty %}
+                            <p class="text-muted small">No se ha registrado experiencia laboral.</p>
+                            {% endfor %}
+                        </div>
+                    </section>
+
+                    <!-- Educación & Formación Académica -->
+                    <section class="cv-section">
+                        <h2 class="cv-section-title">
+                            <i class="fa-solid fa-graduation-cap text-primary"></i> Educación y Formación
+                        </h2>
+                        <div class="row g-2">
+                            {% for edu in educaciones %}
+                            <div class="col-12">
+                                <div class="cv-edu-card">
+                                    <div class="d-flex justify-content-between align-items-baseline flex-wrap gap-2">
+                                        <h6 class="mb-1">{{ edu.titulo }}</h6>
+                                        <span class="text-muted small font-monospace">{{ edu.fecha_inicio|date:"Y" }} — {{ edu.fecha_fin|date:"Y"|default:"Presente" }}</span>
+                                    </div>
+                                    <div class="cv-institucion fw-medium">{{ edu.institucion }}</div>
+                                    {% if edu.descripcion %}
+                                    <div class="text-muted small mt-1">{{ edu.descripcion }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="col-12"><p class="text-muted small">No se ha registrado educación.</p></div>
+                            {% endfor %}
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+            <!-- 3. SECCIÓN DE ANEXOS Y CERTIFICADOS PDF VISIBLES (A ANCHO COMPLETO) -->
             {% if certificados %}
-            <div class="cv-page-break">
-                <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="cv-annex-section">
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                     <h2 class="cv-section-title mb-0 border-0 pb-0">
                         <i class="fa-solid fa-folder-open text-danger me-2"></i> Anexos y Certificaciones Adjuntas
                     </h2>
@@ -584,37 +735,35 @@
                     </span>
                 </div>
                 <p class="text-muted small mb-4">
-                    A continuación se renderizan visualmente las páginas completas de los certificados adjuntos correspondientes a este perfil profesional.
+                    Documentos de respaldo y certificaciones oficiales asociadas a este perfil profesional.
                 </p>
 
-                <div class="row g-4">
+                <div class="row g-3">
                     {% for cert in certificados %}
                     <div class="col-12">
                         <div class="cv-annex-card">
-                            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+                            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
                                 <div>
-                                    <h4 class="fw-bold text-dark mb-1 fs-5">
-                                        <i class="fa-solid fa-award text-warning me-2"></i> {{ cert.nombre }}
+                                    <h4 class="fw-bold text-dark mb-1 fs-6">
+                                        <i class="fa-solid fa-award text-warning me-1"></i> {{ cert.nombre }}
                                     </h4>
-                                    <div class="text-secondary small fw-medium">
+                                    <div class="text-secondary small">
                                         <i class="fa-regular fa-building me-1"></i> Emite: <strong>{{ cert.institucion|default:"Institución no especificada" }}</strong>
                                         {% if cert.fecha_obtencion %} | <i class="fa-regular fa-calendar me-1"></i> Fecha: {{ cert.fecha_obtencion|date:"Y-m-d" }}{% endif %}
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center gap-2">
+                                <div class="d-flex align-items-center gap-1">
                                     {% for cat in cert.categorias.all %}
                                     <span class="badge-cat-tag">{{ cat.nombre }}</span>
                                     {% endfor %}
                                 </div>
                             </div>
 
-                            <!-- Contenedor donde PDF.js renderizará las páginas reales del PDF -->
-                            <!-- Acceso público verificado: solo certificados activos del perfil dueño,
-                                 identificado por username (multi-usuario). -->
+                            <!-- Contenedor donde PDF.js renderiza las páginas en Canvas -->
                             <div class="pdf-canvas-container text-center bg-light p-2 rounded-3 border"
                                  id="pdf-container-{{ cert.id }}"
                                  data-pdf-url="{% url 'certificados:certificado_publico_descargar' perfil.usuario.username cert.id %}">
-                                <div class="py-4 text-muted small pdf-loading-msg">
+                                <div class="py-3 text-muted small pdf-loading-msg">
                                     <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
                                     Cargando vista previa visual del certificado PDF...
                                 </div>
@@ -626,25 +775,25 @@
             </div>
             {% endif %}
 
+            <!-- 5. FOOTER DEL CV: TEXTO ROJO CENTRADO (#ff4757) -->
+            <footer class="cv-footer">
+                <span class="cv-footer-signature">◆ Lenin Ortiz - CV Adaptable</span>
+            </footer>
+
         </main>
     </div>
 
-    <!-- PDF.js para renderizar páginas completas del PDF en Canvas -->
+    <!-- PDF.js para renderizar páginas de certificados en Canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-    <!-- html2pdf.js para exportar todo el DOM + Canvas a un único PDF descargable -->
+    <!-- html2pdf.js para exportar el CV completo a PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script>
-        // Configurar worker de PDF.js
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-        // Promise global que se resuelve cuando TODOS los certificados terminaron de
-        // dibujarse en sus canvas. La descarga del PDF espera esta promesa para que
-        // ninguna página de certificado quede vacía.
         window.__certRenderPromise = Promise.resolve();
 
-        // Renderizar todos los certificados PDF adjuntos visualmente en el DOM.
+        // Renderizado automático de los certificados adjuntos
         (function renderCertificados() {
             const containers = document.querySelectorAll('.pdf-canvas-container');
             if (containers.length === 0) return;
@@ -663,7 +812,6 @@
                         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                             rastreo.push(pdf.getPage(pageNum).then(function(page) {
                                 const viewport = page.getViewport({ scale: 1.5 });
-
                                 const canvas = document.createElement('canvas');
                                 canvas.className = 'pdf-canvas-render shadow-sm my-2';
                                 canvas.height = viewport.height;
@@ -680,12 +828,12 @@
                         }
                         Promise.all(rastreo).then(resolver).catch(function(err) {
                             console.error('Error al renderizar PDF:', err);
-                            container.innerHTML = '<div class="alert alert-warning border small text-muted my-2"><i class="fa-solid fa-file-pdf text-danger me-2"></i> Documento de respaldo PDF cargado (sin vista previa canvas activa)</div>';
+                            container.innerHTML = '<div class="alert alert-warning border small text-muted my-2"><i class="fa-solid fa-file-pdf text-danger me-2"></i> Documento de respaldo PDF adjunto</div>';
                             resolver();
                         });
                     }).catch(function(err) {
                         console.error('Error al cargar PDF:', err);
-                        container.innerHTML = '<div class="alert alert-warning border small text-muted my-2"><i class="fa-solid fa-file-pdf text-danger me-2"></i> Documento de respaldo PDF cargado (sin vista previa canvas activa)</div>';
+                        container.innerHTML = '<div class="alert alert-warning border small text-muted my-2"><i class="fa-solid fa-file-pdf text-danger me-2"></i> Documento de respaldo PDF adjunto</div>';
                         resolver();
                     });
                 }));
@@ -694,44 +842,26 @@
             window.__certRenderPromise = Promise.all(tareas);
         })();
 
-        // Función para descargar el documento PDF completo (CV + páginas de certificados).
-        //
-        // IMPORTANTE: los canvas HTML5 tienen un tamaño máximo en el navegador. Capturar
-        // TODO el documento (CV + todos los certificados en alta resolución) en un único
-        // html2canvas supera ese límite y el PDF resultante sale COMPLETAMENTE EN BLANCO.
-        // Por eso la transformación se divide en dos fases:
-        //   1) Solo el cuerpo del CV se captura con html2pdf (paginación automática).
-        //   2) Cada página de certificado se añade directamente al mismo PDF.
-        //
-        // AJUSTE A UNA SOLA PÁGINA:
-        // El CSS ya está pensado para que, con una cantidad "normal" de experiencia/
-        // educación/habilidades, el CV quepa en una hoja Carta. Pero si el contenido de
-        // un perfil concreto es más largo, se aplica un "encogido" visual (scale) justo
-        // antes de capturar, calculado para que la altura resultante quepa en una sola
-        // página Carta. Así nunca se genera una segunda página del CV en blanco.
+        // Función para descargar PDF unificado (CV + Anexos)
         async function descargarPDF(btn) {
             const etiquetaOriginal = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Generando PDF...';
 
             const element = document.getElementById('cvPaper');
-            const anexos = element ? element.querySelector('.cv-page-break') : null;
+            const anexos = element ? element.querySelector('.cv-annex-section') : null;
             let escalaAplicada = 1;
             let anchoOriginal = 0;
 
             try {
-                // 1) Esperar a que todos los certificados terminen de renderizarse.
                 await (window.__certRenderPromise || Promise.resolve());
+                if (!element) throw new Error('No se encontró el elemento cvPaper.');
 
-                if (!element) throw new Error('No se encontró el documento del CV.');
-
-                // 2) Ocultar la sección de anexos solo durante la captura del CV.
                 if (anexos) anexos.style.display = 'none';
 
-                // 2.1) Auto-fit a una sola página Carta (8.5in x 11in, portrait).
-                const RATIO_ALTO_ANCHO_CARTA = 11 / 8.5;
+                const RATIO_ALTO_ANCHO_A4 = 1.414;
                 anchoOriginal = element.offsetWidth;
-                const alturaDisponible = anchoOriginal * RATIO_ALTO_ANCHO_CARTA;
+                const alturaDisponible = anchoOriginal * RATIO_ALTO_ANCHO_A4;
                 const alturaContenido = element.scrollHeight;
 
                 if (alturaContenido > alturaDisponible) {
@@ -746,31 +876,28 @@
                     filename:     `CV_{{ perfil.nombre_completo|slugify }}.pdf`,
                     image:        { type: 'jpeg', quality: 0.98 },
                     html2canvas:  { scale: 2, useCORS: true, logging: false },
-                    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
                     pagebreak:    { mode: ['css', 'legacy'] }
                 };
 
-                // 3) Capturar SOLO el CV. html2pdf pagina automáticamente las hojas.
                 const worker = html2pdf().set(opt).from(element).toPdf();
                 const pdf = await worker.get('pdf');
 
-                // 4) Restaurar los anexos y el tamaño/escala original en pantalla.
                 if (anexos) anexos.style.display = '';
                 if (escalaAplicada !== 1) {
                     element.style.transform = '';
                     element.style.width = '';
                 }
 
-                // 5) Validar que el lienzo del CV no quedó vacío.
                 if (pdf.getNumberOfPages() === 0) {
-                    throw new Error('El lienzo del CV quedó vacío.');
+                    throw new Error('El PDF quedó vacío.');
                 }
 
-                // 6) Añadir cada página de certificado al MISMO documento PDF.
+                // Añadir páginas de certificados anexos
                 const pageW = pdf.internal.pageSize.getWidth();
                 const pageH = pdf.internal.pageSize.getHeight();
                 document.querySelectorAll('.pdf-canvas-container canvas.pdf-canvas-render').forEach(function(canvas) {
-                    pdf.addPage('letter', 'portrait');
+                    pdf.addPage('a4', 'portrait');
                     const ratio = canvas.width / canvas.height;
                     let w = pageW;
                     let h = w / ratio;
@@ -781,16 +908,15 @@
                     );
                 });
 
-                // 7) Guardar el documento final.
                 pdf.save(opt.filename);
             } catch (err) {
-                console.error('Error al generar el PDF:', err);
+                console.error('Error al generar PDF:', err);
                 if (anexos) anexos.style.display = '';
                 if (escalaAplicada !== 1 && element) {
                     element.style.transform = '';
                     element.style.width = '';
                 }
-                alert('Ocurrió un error al generar el PDF. Revisa la consola del navegador (F12).');
+                alert('Ocurrió un error al generar el PDF. Revisa la consola del navegador.');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = etiquetaOriginal;
