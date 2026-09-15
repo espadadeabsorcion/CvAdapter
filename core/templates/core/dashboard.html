@@ -170,5 +170,25 @@
             </div>
         </div>
     </div>
+
+    {% if user.is_staff or user.is_superuser %}
+    <!-- Administración de Usuarios (Staff) -->
+    <div class="col-sm-6 col-lg-4">
+        <div class="card card-custom h-100 p-3 border-2 border-warning">
+            <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="p-3 rounded-3 bg-warning bg-opacity-10 text-warning me-3">
+                        <i class="fa-solid fa-users-gear fs-3"></i>
+                    </div>
+                    <h5 class="card-title fw-bold mb-0">Gestión de Usuarios</h5>
+                </div>
+                <p class="card-text text-muted small flex-grow-1">Control de acceso, creación y administración de cuentas de usuario del sistema.</p>
+                <a href="{% url 'core:admin_usuario_lista' %}" class="btn btn-warning btn-sm px-3 mt-2 fw-semibold text-dark">
+                    <i class="fa-solid fa-user-shield me-1"></i> Administrar usuarios
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

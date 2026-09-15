@@ -205,7 +205,7 @@
                 </div>
 
                 <!-- Acciones -->
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center mb-4">
                     <a href="{% url 'core:dashboard' %}" class="btn btn-outline-secondary px-3">
                         <i class="fa-solid fa-arrow-left me-1"></i> Dashboard
                     </a>
@@ -214,6 +214,18 @@
                     </button>
                 </div>
             </form>
+
+            <hr class="my-4">
+
+            <!-- Zona de Gestión de Cuenta -->
+            <div class="d-flex justify-content-between align-items-center text-muted small">
+                <div>
+                    <i class="fa-solid fa-user-shield me-1"></i> Cuenta de usuario: <strong>@{{ request.user.username }}</strong>
+                </div>
+                <a href="{% url 'core:eliminar_cuenta' %}" class="text-danger text-decoration-none fw-semibold">
+                    <i class="fa-solid fa-trash-can me-1"></i> Eliminar mi cuenta
+                </a>
+            </div>
         </div>
     </div>
 </div>

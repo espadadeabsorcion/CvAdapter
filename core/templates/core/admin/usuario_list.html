@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Gestión de Usuarios — CV Adaptable{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+        <h2 class="mb-1 fw-bold"><i class="fa-solid fa-users-gear text-primary me-2"></i> Gestión de Usuarios</h2>
+        <p class="text-muted mb-0">Listado, control de acceso y administración de cuentas de usuario del sistema.</p>
+    </div>
+    <a href="{% url 'core:admin_usuario_nuevo' %}" class="btn btn-cv-primary px-3 shadow-sm">
+        <i class="fa-solid fa-user-plus me-1"></i> Nuevo Usuario
+    </a>
+</div>
+
+<div class="card card-custom shadow-sm border-0">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-4">Usuario</th>
+                    <th>Nombre / Perfil</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Fecha Registro</th>
+                    <th class="text-end pe-4">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                <tr>
+                    <td class="ps-4 fw-bold text-primary">
+                        <i class="fa-solid fa-circle-user text-secondary me-1"></i> @{{ u.username }}
+                        {% if u == request.user %}
+                            <span class="badge bg-info text-dark rounded-pill ms-1 small">Tú</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ u.perfil.nombre_completo|default:u.get_full_name|default:"—" }}
+                    </td>
+                    <td class="font-monospace small">{{ u.email|default:"—" }}</td>
+                    <td>
+                        {% if u.is_superuser %}
+                            <span class="badge bg-danger rounded-pill">Superusuario</span>
+                        {% elif u.is_staff %}
+                            <span class="badge bg-primary rounded-pill">Staff / Admin</span>
+                        {% else %}
+                            <span class="badge bg-light text-dark border rounded-pill">Usuario</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if u.is_active %}
+                            <span class="badge bg-success bg-opacity-10 text-success border border-success rounded-pill px-2">
+                                <i class="fa-solid fa-circle-check me-1"></i> Activo
+                            </span>
+                        {% else %}
+                            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger rounded-pill px-2">
+                                <i class="fa-solid fa-circle-xmark me-1"></i> Suspendido
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td class="text-muted small">{{ u.date_joined|date:"d/m/Y H:i" }}</td>
+                    <td class="text-end pe-4">
+                        <div class="d-inline-flex gap-1">
+                            <!-- Ver CV público -->
+                            <a href="{% url 'cv_publico' u.username %}" class="btn btn-sm btn-outline-secondary" title="Ver CV Público" target="_blank">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+
+                            <!-- Editar -->
+                            <a href="{% url 'core:admin_usuario_editar' u.pk %}" class="btn btn-sm btn-outline-primary" title="Editar Usuario">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+
+                            <!-- Alternar Activo / Suspender -->
+                            {% if u != request.user %}
+                            <form method="post" action="{% url 'core:admin_usuario_toggle_active' u.pk %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm {% if u.is_active %}btn-outline-warning{% else %}btn-outline-success{% endif %}" title="{% if u.is_active %}Suspender Cuenta{% else %}Reactivar Cuenta{% endif %}">
+                                    <i class="fa-solid {% if u.is_active %}fa-ban{% else %}fa-check{% endif %}"></i>
+                                </button>
+                            </form>
+
+                            <!-- Eliminar -->
+                            <a href="{% url 'core:admin_usuario_eliminar' u.pk %}" class="btn btn-sm btn-outline-danger" title="Eliminar Usuario">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center py-4 text-muted">No hay usuarios registrados.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if is_paginated %}
+<nav class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+        {% endif %}
+        <li class="page-item active"><span class="page-link">{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

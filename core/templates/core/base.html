@@ -36,6 +36,11 @@
                 <a href="{% url 'core:dashboard' %}" class="btn btn-sm btn-outline-light rounded-pill px-3">
                     <i class="fa-solid fa-gauge me-1"></i> Dashboard
                 </a>
+                {% if user.is_staff or user.is_superuser %}
+                <a href="{% url 'core:admin_usuario_lista' %}" class="btn btn-sm btn-warning rounded-pill px-3 fw-semibold">
+                    <i class="fa-solid fa-users-gear me-1"></i> Usuarios
+                </a>
+                {% endif %}
                 <form method="post" action="{% url 'core:logout' %}" class="m-0">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-cv-danger fw-semibold rounded-pill px-3">

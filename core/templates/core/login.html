@@ -110,7 +110,11 @@
                 >
             </div>
 
-            <button type="submit" class="btn btn-cv-primary">Iniciar sesión</button>
+            <button type="submit" class="btn btn-cv-primary mb-3">Iniciar sesión</button>
+            <div class="text-center">
+                <span class="text-muted small">¿Aún no tienes cuenta?</span>
+                <a href="{% url 'core:registro' %}" class="fw-semibold text-decoration-none small ms-1">Crear cuenta</a>
+            </div>
             <div class="text-center mt-3">
                 <a href="{% url 'root' %}" class="text-decoration-none text-muted small">
                     &larr; Volver al CV principal
