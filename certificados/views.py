@@ -178,3 +178,32 @@ class CertificadoDownloadView(LoginRequiredMixin, View):
             content_type='application/pdf',
             filename=certificado.archivo_url or f"certificado_{certificado.pk}.pdf"
         )
+
+
+class CertificadoPublicoDownloadView(View):
+    """
+    Servicio público (sin login) de descarga/visualización de un certificado.
+
+    Multi-usuario: el perfil dueño se identifica por ``username`` en la URL.
+    Solo son accesibles los certificados activos de perfiles activos de
+    usuarios activos; cualquier otro intento devuelve 404 (así un perfil
+    desactivado retira de inmediato sus certificados del dominio público).
+    """
+    def get(self, request, username, pk, *args, **kwargs):
+        certificado = get_object_or_404(
+            Certificado,
+            pk=pk,
+            is_active=True,
+            perfil__is_active=True,
+            perfil__usuario__username=username,
+            perfil__usuario__is_active=True,
+        )
+        path_archivo = CertificadoFileHandler.get_file_path(certificado)
+        if not path_archivo or not os.path.exists(path_archivo):
+            raise Http404("El archivo PDF no fue encontrado en el servidor.")
+
+        return FileResponse(
+            open(path_archivo, 'rb'),
+            content_type='application/pdf',
+            filename=certificado.archivo_url or f"certificado_{certificado.pk}.pdf"
+        )

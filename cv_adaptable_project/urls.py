@@ -4,6 +4,7 @@ URL configuration for cv_adaptable_project project.
 from django.contrib import admin
 from django.urls import path, include
 from core.views import RootRedirectView
+import generador.views as generador_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +17,10 @@ urlpatterns = [
     # Certificados & Categorías
     path('', include('certificados.urls')),
     # Generador de CV adaptado
+    # Las rutas públicas del CV van ANTES del include('generador.urls') para
+    # garantizar su prioridad en la resolución de URLs.
+    path('cv/publico/', generador_views.CVPublicoView.as_view(), name='cv_publico_por_defecto'),
+    path('cv/publico/<str:username>/', generador_views.CVPublicoView.as_view(), name='cv_publico'),
     path('cv/', include('generador.urls')),
 ]
 

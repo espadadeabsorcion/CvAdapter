@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
@@ -94,4 +94,57 @@ class PreviewCvView(LoginRequiredMixin, View):
             incluir_anexos=incluir_anexos,
         )
         return HttpResponse(html)
+
+
+class CVPublicoView(View):
+    """
+    Genera el CV de forma PÚBLICA (sin autenticación), para poder compartirlo
+    externamente (p. ej. como anexo de una postulación).
+
+    Es multi-usuario: el perfil se identifica por el ``username`` del dueño en
+    la URL (``/cv/publico/<username>/``). Si no se recibe username, se publica
+    el primer perfil activo (comodidad de instalación single-user).
+
+    A diferencia de ``GenerarCvView``/``PreviewCvView`` no requiere sesión, no
+    aplica ningún filtrado por categorías (muestra TODAS) y usa un template
+    propio sin controles de usuario autenticado.
+
+    Nota de seguridad: es una vista de solo lectura (GET) que no procesa datos
+    del cliente, por lo que NO necesita ``@csrf_exempt``. Si mañana admitiera
+    POST/PUT, habría que evaluar la protección CSRF al diseñarla.
+    """
+    template_name = 'generador/cv_publico.html'
+
+    def get(self, request, username=None, *args, **kwargs):
+        perfil = self._get_perfil_publico(username)
+        generator = CVGenerator(
+            perfil=perfil,
+            categorias_seleccionadas=[],
+            template_name=self.template_name,
+        )
+        html = generator.generate_html(
+            request=request,
+            incluir_anexos=True,  # se publican siempre los anexos completos
+        )
+        return HttpResponse(html)
+
+    def _get_perfil_publico(self, username=None) -> Perfil:
+        """Resuelve el perfil publicado (multi-usuario por username).
+
+        Solo se publican perfiles activos de usuarios activos. Si el ``username``
+        no coincide con ningún perfil publicable, se devuelve 404 (así un perfil
+        desactivado deja de ser accesible de inmediato).
+        """
+        qs = (
+            Perfil.objects
+            .filter(is_active=True, usuario__is_active=True)
+            .select_related('usuario')
+        )
+        if username:
+            qs = qs.filter(usuario__username=username)
+
+        perfil = qs.order_by('pk').first()
+        if perfil is None:
+            raise Http404('No hay ningún CV publicado.')
+        return perfil
 

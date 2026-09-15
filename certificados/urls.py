@@ -16,5 +16,7 @@ urlpatterns = [
     path('certificados/<int:pk>/editar/', views.CertificadoUpdateView.as_view(), name='certificado_editar'),
     path('certificados/<int:pk>/eliminar/', views.CertificadoDeleteView.as_view(), name='certificado_eliminar'),
     path('certificados/<int:pk>/descargar/', views.CertificadoDownloadView.as_view(), name='certificado_descargar'),
+    # Descarga/visualización pública de un certificado de un perfil público (multi-usuario)
+    path('certificados/publico/<str:username>/<int:pk>/descargar/', views.CertificadoPublicoDownloadView.as_view(), name='certificado_publico_descargar'),
 
 ]
