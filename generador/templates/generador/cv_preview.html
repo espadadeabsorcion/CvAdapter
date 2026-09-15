@@ -119,6 +119,16 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
+        /* Fotografía del Perfil en el Encabezado */
+        .cv-photo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
         /* Cuerpo del CV: padding reducido para ganar espacio vertical */
         .cv-main {
             padding: 1.1rem 1.75rem;
@@ -419,9 +429,16 @@
                 </div>
 
                 <div class="col-md-3 text-md-end mt-2 mt-md-0 d-none d-md-block">
+                    {% if perfil.foto_efectiva %}
+                    <img src="{{ perfil.foto_efectiva }}"
+                         alt="Foto de {{ perfil.nombre_completo }}"
+                         class="cv-photo ms-auto"
+                         crossorigin="anonymous">
+                    {% else %}
                     <div class="cv-avatar-badge ms-auto">
                         {{ perfil.nombre_completo|slice:":1"|upper }}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </header>
