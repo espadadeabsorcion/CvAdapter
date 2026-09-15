@@ -9,6 +9,7 @@ Requisitos cubiertos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 11.1
 from django.test import TestCase, Client, override_settings
 from django.contrib.auth.models import User
 from django.urls import reverse
+from perfil.models import Perfil
 
 
 # ---------------------------------------------------------------------------
@@ -29,6 +30,13 @@ class AuthTests(TestCase):
         self.user = User.objects.create_user(
             username='testuser',
             password='testpass123'
+        )
+        self.perfil = Perfil.objects.create(
+            usuario=self.user,
+            nombre_completo='Usuario de Prueba',
+            email='test@example.com',
+            titulo_profesional='Tester',
+            resumen_profesional='Resumen de prueba'
         )
         # Cliente sin CSRF enforcement para la mayoría de los tests
         self.client = Client(enforce_csrf_checks=False)
@@ -180,16 +188,20 @@ class AuthTests(TestCase):
         response = self.client.get(reverse('core:dashboard'))
         self.assertRedirects(response, '/login/?next=/dashboard/')
 
-    def test_ruta_raiz_sin_sesion_redirige_login(self):
-        """GET a / sin sesión → redirige a /login/."""
+    def test_ruta_raiz_sin_sesion_muestra_cv_y_boton_login(self):
+        """GET a / sin sesión → muestra el CV público (200) con botón para iniciar sesión."""
         response = self.client.get('/')
-        self.assertRedirects(response, '/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Iniciar Sesión')
+        self.assertContains(response, 'Usuario de Prueba')
 
-    def test_ruta_raiz_con_sesion_redirige_dashboard(self):
-        """GET a / con sesión activa → redirige a /dashboard/."""
+    def test_ruta_raiz_con_sesion_muestra_cv_y_dashboard(self):
+        """GET a / con sesión activa → muestra el CV público (200) con acceso al dashboard."""
         self.client.force_login(self.user)
         response = self.client.get('/')
-        self.assertRedirects(response, '/dashboard/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Dashboard')
+        self.assertContains(response, 'Salir')
 
     def test_usuario_autenticado_en_login_redirige_dashboard(self):
         """Si ya está autenticado, GET /login/ redirige a /dashboard/."""

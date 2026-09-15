@@ -3,13 +3,12 @@ URL configuration for cv_adaptable_project project.
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import RootRedirectView
 import generador.views as generador_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # Raíz: redirige según estado de sesión
-    path('', RootRedirectView.as_view(), name='root'),
+    # Raíz: la página de inicio es el CV público
+    path('', generador_views.CVPublicoView.as_view(), name='root'),
     # Core: login, logout, dashboard
     path('', include('core.urls')),
     # Perfil: perfil personal, experiencia, educación, habilidades, idiomas

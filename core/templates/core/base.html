@@ -30,6 +30,9 @@
                 <span class="d-none d-sm-inline fw-medium opacity-90">
                     <i class="fa-solid fa-circle-user me-1"></i> {{ user.get_full_name|default:user.username }}
                 </span>
+                <a href="{% url 'root' %}" class="btn btn-sm btn-outline-light rounded-pill px-3">
+                    <i class="fa-solid fa-file-lines me-1"></i> Ver CV
+                </a>
                 <a href="{% url 'core:dashboard' %}" class="btn btn-sm btn-outline-light rounded-pill px-3">
                     <i class="fa-solid fa-gauge me-1"></i> Dashboard
                 </a>

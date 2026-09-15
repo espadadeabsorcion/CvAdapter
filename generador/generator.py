@@ -128,9 +128,7 @@ class CVGenerator:
             str: HTML renderizado del CV.
         """
         context = self.get_context_data(incluir_anexos=incluir_anexos)
-        if request:
-            context['request'] = request
-        return render_to_string(self.template_name, context)
+        return render_to_string(self.template_name, context, request=request)
 
     # ------------------------------------------------------------------ #
     # Exportación PDF (preparado para el futuro)
